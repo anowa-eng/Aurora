@@ -22,7 +22,7 @@ installpkg() {
 installpkg python3
 installpkg git-all
 
-where_to_clone="$(read -o "Where would you like the Aurora repository to be cloned? (~/.aurora/lib/)")"
+where_to_clone="$(read -p "Where would you like the Aurora repository to be cloned? (~/.aurora/lib/)")"
 if [ -z "$where_to_clone" ]; then
     where_to_clone="~/aurora/lib"
 mkdir "$where_to_clone"
