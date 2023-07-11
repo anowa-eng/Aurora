@@ -1,5 +1,4 @@
 c
-
 installpkg() {
     is_installed="$(apt list 2>/dev/null | grep "^$1/")"
     if [ -z "$is_installed" ]; then
@@ -25,6 +24,7 @@ installpkg git-all
 where_to_clone="$(read -p "Choose where to install Aurora (~/.aurora/lib/) ")"
 if [ -z "$where_to_clone" ]; then
     where_to_clone="~/.aurora/lib"
+fi
 echo "> mkdir ~/.aurora"
 mkdir ~/.aurora
 echo "> mkdir -p $where_to_clone"
