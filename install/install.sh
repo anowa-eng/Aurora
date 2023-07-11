@@ -1,4 +1,4 @@
-c
+#!/bin/bash
 installpkg() {
     is_installed="$(apt list 2>/dev/null | grep "^$1/")"
     if [ -z "$is_installed" ]; then
