@@ -5,7 +5,7 @@ installpkg() {
     if [ -z "$is_installed" ]; then
         understands=0
         while [ ! understands ]; do
-            program_is_to_install="$(read -i "$1 has not been detected on this system. Would you like to install? [y/N] ")"
+            program_is_to_install="$(read -p "$1 has not been detected on this system. Would you like to install? [y/N] ")"
             if [ $program_is_to_install || $program_is_to_install == 'y|Y' ]; then
                 understands=1
                 echo "\n> sudo apt install $1\n"
@@ -22,7 +22,7 @@ installpkg() {
 installpkg python3
 installpkg git-all
 
-where_to_clone="$(read -i "Where would you like the Aurora repository to be cloned? (~/.aurora/lib/)")"
+where_to_clone="$(read -o "Where would you like the Aurora repository to be cloned? (~/.aurora/lib/)")"
 if [ -z "$where_to_clone" ]; then
     where_to_clone="~/aurora/lib"
 mkdir "$where_to_clone"
