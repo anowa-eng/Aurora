@@ -1,7 +1,7 @@
-
+c
 
 installpkg() {
-    is_installed="$(apt list | grep "^$1/")"
+    is_installed="$(apt list 2>/dev/null | grep "^$1/")"
     if [ -z "$is_installed" ]; then
         understands=0
         while [ ! understands ]; do
@@ -22,10 +22,13 @@ installpkg() {
 installpkg python3
 installpkg git-all
 
-where_to_clone="$(read -p "Where would you like the Aurora repository to be cloned? (~/.aurora/lib/)")"
+where_to_clone="$(read -p "Choose where to install Aurora (~/.aurora/lib/) ")"
 if [ -z "$where_to_clone" ]; then
-    where_to_clone="~/aurora/lib"
-mkdir "$where_to_clone"
+    where_to_clone="~/.aurora/lib"
+echo "> mkdir ~/.aurora"
+mkdir ~/.aurora
+echo "> mkdir -p $where_to_clone"
+mkdir -p "$where_to_clone"
 git clone https://github.com/anowa-eng/Aurora.git "$where_to_clone"
 
 cd "$where_to_clone/install"
