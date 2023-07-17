@@ -1,28 +1,26 @@
 import sys
 import opencc
 import json
-from lib import commands
 from lib.parser import argparser
+from lib.shell.shell import shell
 sys.path.append('./..')
 from version.version import VERSION
+from sdk.main import _Model
 
+cmd = sys.argv[1]
 args = argparser.parse_args(sys.argv[1:])
 
 if hasattr(args, 'version'):
     if args.version:
         print(VERSION)
-if hasattr(args, 'name_of_new_model'):
+
+if cmd == 'new':
     try:
-        commands.model_new(args.name_of_new_model)
+        _Model.create_new(args.name)
         api_log = json.dumps({ 'ok': True })
-        print(api_log if args.api_logs_only else f'Created a new model under \u001b[1m{arg}')
+        print(f'Created a new model under \u001b[1m{args.name}')
     except Exception as e:
-        if args.api_logs_only:
-            msg = json.dumps({
-                'ok': False,
-                'error': str(e)
-            })
-            print(msg)
-        else:
-            print('Created a ')
-    
+       print(e)
+
+if cmd == 'shell':
+    shell()
